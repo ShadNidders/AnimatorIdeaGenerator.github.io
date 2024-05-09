@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="in">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Temas Aleatorios</title>
+    <style>
+        body {
+            font-family: "Times New Roman", sans-serif;
+            text-align: center;
+        }
+
+        h1 {
+            color: #000;
+        }
+
+        #generateBtn, #copyBtn {
+            padding: 10px 20px;
+            background-color: #80087D;
+            color: #222E38;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            margin-right: 10px;
+        }
+
+        #generateBtn:hover, #copyBtn:hover {
+            background-color: #C4F08B;
+        }
+
+        #themeContainer {
+            border: 2px solid #333;
+            padding: 20px;
+            margin: 0 auto;
+            max-width: 400px;
+            border-radius: 10px;
+        }
+
+        #themeText {
+            font-size: 18px;
+        }
+
+        .language-dropdown {
+            display: none;
+        }
+
+        .dropdown-icon {
+            cursor: pointer;
+        }
+
+        .dropdown-icon::after {
+            content: "\2261"; /* Unicode for hamburger icon */
+            display: block;
+            margin-top: 5px;
+            font-size: 20px;
+        }
+
+        .language-dropdown.active {
+            display: block;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Generador de Temas Aleatorios</h1>
+    <div>
+        <div class="dropdown-icon" onclick="toggleLanguageDropdown()"></div>
+        <div class="language-dropdown" id="languageDropdown">
+            <select id="languageSelect">
+                <option value="es">Español</option>
+                <option value="en">Inglés</option>
+                <option value="pt">Portugués</option>
+                <option value="ru">Ruso</option>
+                <option value="fr">Francés</option>
+                <option value="ar">Árabe</option>
+            </select>
+            <button id="resetBtn">Reiniciar</button>
+        </div>
+        <button id="generateBtn">Generar Tema</button>
+        <button id="copyBtn">Copiar Ideas</button>
+        <label for="themeCount">Cantidad de temas:</label>
+        <input type="range" id="themeCount" name="themeCount" min="2" max="32" value="2">
+        <span id="themeCountValue">1</span>
+    </div>
+    <div id="themeContainer">
+        <p id="themeText">¡Haz clic en el botón para generar un tema aleatorio!:</p>
+    </div>
+
+    <script>
+        const themes = [
+            "Pelea",
+            "En el aire",
+            "Poderes elementales",
+            "Magia",
+            "Viaje en el tiempo",
+            "Mundo submarino",
+            "Aventura espacial",
+            "Superhéroes",
+            "Robots",
+            "Criaturas fantásticas",
+            "impact frame",
+            "Naturaleza",
+            "Tecnología",
+            "Espacio",
+            "Deportes",
+            "elementos",
+            "dia normal",
+            "camara lenta",
+            "grandes velocidades",
+            "edificios",
+            "armas blancas",
+            "armas de fuego",
+            "entrenamiento",
+            "allanamiento militar",
+            "Desafío en la selva",
+            "Carrera de vehículos",
+            "Rescate en alta mar",
+            "Aventura en el desierto",
+            "Ciborgs",
+            "Viaje interdimensional",
+            "Misterio en una ciudad fantasma",
+            "Conquista del espacio",
+            "Extraterrestres",
+            "Intriga política",
+            "Fantasía medieval",
+            "Secuestro en un avión",
+            "Pandemia global",
+            "Infiltración en una base enemiga",
+            "Apocalipsis zombi",
+            "Viaje al centro de la Tierra",
+            "Descubrimiento de un tesoro perdido",
+            "Conspiración alienígena",
+            "Asedio a una fortaleza",
+            "Exploración del fondo marino",
+            "Fuga de una prisión de máxima seguridad",
+            "Guerra entre mundos paralelos",
+            "Aventura en la jungla urbana",
+            "Carrera contra el tiempo",
+            "Batalla épica final"
+        ];
+
+        const generateBtn = document.getElementById("generateBtn");
+        const resetBtn = document.getElementById("resetBtn");
+        const copyBtn = document.getElementById("copyBtn");
+        const themeText = document.getElementById("themeText");
+        const themeIdeas = document.getElementById("themeIdeas");
+        const languageDropdown = document.getElementById("languageDropdown");
+
+        generateBtn.addEventListener("click", () => {
+            generateTheme();
+        });
+
+        resetBtn.addEventListener("click", () => {
+            resetGenerator();
+        });
+
+        copyBtn.addEventListener("click", () => {
+            copyIdeas();
+        });
+
+        function generateTheme() {
+            const randomIndex = Math.floor(Math.random() * themes.length);
+            const randomTheme = themes[randomIndex];
+            themeIdeas.textContent = `Sugiero que animes: ${randomTheme}!`;
+        }
+
+        function resetGenerator() {
+            themeIdeas.textContent = "¡Haz clic en el botón para generar un tema aleatorio!";
+        }
+
+        function copyIdeas() {
+            const textToCopy = themeIdeas.textContent;
+            navigator.clipboard.writeText(textToCopy)
+                .then(() => {
+                    alert("¡Las ideas se han copiado al portapapeles!");
+                })
+                .catch(err => {
+                    console.error('Error al copiar las ideas: ', err);
+                });
+        }
+
+        function toggleLanguageDropdown() {
+            languageDropdown.classList.toggle("active");
+        }
+    </script>
+</body>
+</html>
